@@ -108,8 +108,6 @@ console.log("Total with tax: $"+money_round(total));
 
 // // Make an array
 
-// console.log(Math.min(-4, 2));
-
 // function makeArray(num1, num2) {
 // 	var min = Math.min(num1, num2);
 // 	var max = Math.max(num1, num2);
