@@ -85,28 +85,68 @@ var shoppingCart = [
 	isTaxable: true
 }
 ];
+// Create HTML Base
+function createPage(){
+var header = document.createElement('h1');
+header.innerText = "Shopping List";
+document.body.appendChild(header);
+}
 
-var total = 0;
-document.write("<h1>Shopping Cart</h1>");
-for (var i = 0; i < shoppingCart.length; i++) {
-	document.write(shoppingCart[i].name + ": $" + shoppingCart[i].price + "<br>");
-	console.log(shoppingCart[i].name + ": $" + shoppingCart[i].price);
-	if (shoppingCart[i].isTaxable) {
-		total += shoppingCart[i].price * 1.06;
-	} else {
-		total += shoppingCart[i].price;
-	}
-};
+// Function Declarations
+function total(){
+	var total = 0;
+	for (var i = 0; i < shoppingCart.length; i++) {
+		if (shoppingCart[i].isTaxable) {
+			total += shoppingCart[i].price * 1.06;
+		} else {
+			total += shoppingCart[i].price;
+		}
+	};
+	return "$ " + money_round(total);
+}
 
 function money_round(tot) {
 	return Math.ceil(tot * 100) / 100;
 }
 
-document.write("Total with tax: $"+money_round(total));
-console.log("Total with tax: $"+money_round(total));
+function populateList(){
+	//Creates parent elements for appending table cells
+	var table = document.createElement('table');
+	var titleRow = document.createElement('tr');
+	var listRow = document.createElement('tr');
+	var titles = document.createElement('th');
 
+	// Loop through shoppingCart and dynamically create table
+	shoppingCart.forEach(function(x){
+		for (var i = 0; i < 2; i++) {
+			var item = document.createElement('td');
+			if (i === 0) {
+				item.innerText = x.name;
+				listRow.appendChild(list);
 
-// // Make an array
+			} else if (i === 1) {
+				item.innerText = "$" + x.price;
+				listRow.appendChild(list);
+			};
+		};
+	});
+
+	appendTotal();
+
+}
+
+function appendTotal() {
+	var priceRow = document.createElement('tr');
+	var totalHeading = document.createElement('th');
+	totalHeading.setAttribute('colspan', '2');
+	totalHeading.style.text-align = center;
+	totalHeading.innerText('Total');
+	priceRow.appendChild('totalHeading');
+	var totalCell = document.createElement('td');
+	totalCell.innerText = total();
+}
+
+// Make an array
 
 // function makeArray(num1, num2) {
 // 	var min = Math.min(num1, num2);
@@ -119,3 +159,4 @@ console.log("Total with tax: $"+money_round(total));
 // }
 
 // console.log(makeArray(-4, 2));
+
