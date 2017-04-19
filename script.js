@@ -85,11 +85,15 @@ var shoppingCart = [
 	isTaxable: true
 }
 ];
+
+// Beacuase Adam is mean
+
 // Create HTML Base
 function createPage(){
 var header = document.createElement('h1');
 header.innerText = "Shopping List";
 document.body.appendChild(header);
+populateList();
 }
 
 // Function Declarations
@@ -112,40 +116,57 @@ function money_round(tot) {
 function populateList(){
 	//Creates parent elements for appending table cells
 	var table = document.createElement('table');
+	document.body.appendChild(table);
 	var titleRow = document.createElement('tr');
-	var listRow = document.createElement('tr');
-	var titles = document.createElement('th');
+	var title1 = document.createElement('th');
+	var title2 = document.createElement('th');
+	title1.innerText = "Item";
+	titleRow.appendChild(title1);
+	title2.innerText = "Price";
+	titleRow.appendChild(title2);
+	table.appendChild(titleRow);
 
 	// Loop through shoppingCart and dynamically create table
 	shoppingCart.forEach(function(x){
+		var listRow = document.createElement('tr');
 		for (var i = 0; i < 2; i++) {
 			var item = document.createElement('td');
 			if (i === 0) {
 				item.innerText = x.name;
-				listRow.appendChild(list);
+				listRow.appendChild(item);
 
 			} else if (i === 1) {
 				item.innerText = "$" + x.price;
-				listRow.appendChild(list);
+				listRow.appendChild(item);
 			};
 		};
+		
+		table.appendChild(listRow);
 	});
 
-	appendTotal();
+	appendTotal(table);
 
 }
 
-function appendTotal() {
+function appendTotal(table) {
 	var priceRow = document.createElement('tr');
+	table.appendChild(priceRow);
 	var totalHeading = document.createElement('th');
 	totalHeading.setAttribute('colspan', '2');
-	totalHeading.style.text-align = center;
-	totalHeading.innerText('Total');
-	priceRow.appendChild('totalHeading');
+	totalHeading.style.textAlign = "center";
+	totalHeading.innerText = 'Total';
+	priceRow.appendChild(totalHeading);
+	var totalRow = document.createElement('tr');
 	var totalCell = document.createElement('td');
 	totalCell.innerText = total();
+	totalCell.style.textAlign = "center";
+	totalCell.setAttribute('colspan', '2');
+	totalRow.appendChild(totalCell);
+	table.appendChild(totalRow);
 }
 
+
+window.addEventListener("load", createPage());
 // Make an array
 
 // function makeArray(num1, num2) {
