@@ -31,3 +31,7 @@ form {
 input {
 	margin: 0 5px;
 }
+
+button {
+	margin-left: 5px;
+}

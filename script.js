@@ -66,7 +66,7 @@ var shoppingCart = [
 },
 {
 	name: 'VCR tapes',
-	price: .05,	
+	price: 0.05,	
 	isTaxable: true
 },
 {
@@ -115,8 +115,13 @@ function money_round(tot) {
 }
 
 function populateList(){
+	if(document.getElementById('tableId')){
+		var element = document.getElementById('tableId');
+		element.parentNode.removeChild(element);
+	}
 	//Creates parent elements for appending table cells
 	var table = document.createElement('table');
+	table.setAttribute('id', 'tableId');
 	document.body.appendChild(table);
 	var titleRow = document.createElement('tr');
 	var title1 = document.createElement('th');
@@ -137,7 +142,7 @@ function populateList(){
 				listRow.appendChild(item);
 
 			} else if (i === 1) {
-				item.innerText = "$" + x.price;
+				item.innerText = "$" + x.price.toFixed(2);
 				listRow.appendChild(item);
 			};
 		};
@@ -165,26 +170,70 @@ function appendTotal(table) {
 }
 
 function createForm() {
+		// Create form element
 	var form = document.createElement('form');
+		// Create addItem Text box and set Attributes
 	var textBox1 = document.createElement('input');
 	textBox1.setAttribute('type', 'textbox');
 	textBox1.setAttribute('id', 'addItem');
 	textBox1.setAttribute('placeholder', 'Item');
+		// Create addPrice Text box and set Attributes
 	var textBox2 = document.createElement('input');
 	textBox2.setAttribute('type', 'textbox');
 	textBox2.setAttribute('id', 'addPrice');
 	textBox2.setAttribute('placeholder', 'Price');
+		// Create addButton and set Attributes
 	var button = document.createElement('button');
 	button.innerText = 'Add';
+	button.setAttribute('id', 'addBtn');
+	button.setAttribute('type', 'button');
+		// Create taxable item checkbox and set Attributes
+	var checkBox = document.createElement('input');
+	checkBox.setAttribute('type', 'checkbox');
+	checkBox.setAttribute('id', 'checkbox');
+	checkBox.setAttribute('value', 'Taxable');
+		// Create label for checkbox and set Attributes
+	var checkLabel = document.createElement('label');
+	checkLabel.setAttribute('for', 'checkbox');
+	checkLabel.innerText = 'Taxable?';
+		// Appends all elements
 	document.body.appendChild(form);
 	form.appendChild(textBox1);
 	form.appendChild(textBox2);
+	form.appendChild(checkBox);
+	form.appendChild(checkLabel);
 	form.appendChild(button);
 }
+
+function addItems(){
+	var itemVal = document.getElementById('addItem').value;
+	var priceVal = parseInt(document.getElementById('addPrice').value);
+	var taxable = document.getElementById('checkbox').checked;
+	addToList(itemVal, priceVal, taxable);
+	document.getElementById('addItem').value = "";
+	document.getElementById('addPrice').value = "";
+	
+}
+
+function addToList(newName, newPrice, newIsTaxable){
+	
+		shoppingCart[shoppingCart.length] = {
+			name: newName,
+			price: newPrice,
+			isTaxable: newIsTaxable
+		}
+		console.log(shoppingCart);
+		populateList();
+
+}
+
 
 
 window.addEventListener("load", createPage());
 
+document.getElementById('addBtn').addEventListener('click', function(){
+	addItems();
+});
 
 // Make an array
 
