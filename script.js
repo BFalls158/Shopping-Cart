@@ -116,6 +116,7 @@ function money_round(tot) {
 
 function populateList(){
 	//Checks to see if a table already exists if so, deletes and repopulates with new object
+	//Fix for this is to delete only total, append to table, and then only repopulate/update appendTotal.
 	if(document.getElementById('tableId')){
 		var element = document.getElementById('tableId');
 		element.parentNode.removeChild(element);
@@ -240,6 +241,11 @@ window.addEventListener("load", createPage());
 document.getElementById('addBtn').addEventListener('click', function(){
 	addItems();
 });
+
+
+
+
+
 
 // Make an array
 
