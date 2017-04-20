@@ -115,6 +115,7 @@ function money_round(tot) {
 }
 
 function populateList(){
+	//Checks to see if a table already exists if so, deletes and repopulates with new object
 	if(document.getElementById('tableId')){
 		var element = document.getElementById('tableId');
 		element.parentNode.removeChild(element);
@@ -154,6 +155,7 @@ function populateList(){
 
 }
 
+	// Appends total to bottom of table
 function appendTotal(table) {
 	var priceRow = document.createElement('tr');
 	table.appendChild(priceRow);
@@ -205,6 +207,7 @@ function createForm() {
 	form.appendChild(button);
 }
 
+	// Pull values from text boxes and check box
 function addItems(){
 	var itemVal = document.getElementById('addItem').value;
 	var priceVal = parseInt(document.getElementById('addPrice').value);
@@ -215,22 +218,26 @@ function addItems(){
 	
 }
 
+	// Takes arguments to create new object and add to shoppingCart array
 function addToList(newName, newPrice, newIsTaxable){
-	
+	if (newName.length > 0 && isNaN(newPrice) === false) {
 		shoppingCart[shoppingCart.length] = {
 			name: newName,
 			price: newPrice,
 			isTaxable: newIsTaxable
 		}
+	} else {
+		alert('Please input an item name and valid number');
+	}
 		console.log(shoppingCart);
 		populateList();
 
 }
 
 
-
+	//Creates page
 window.addEventListener("load", createPage());
-
+	//Event handler for on click function of add button
 document.getElementById('addBtn').addEventListener('click', function(){
 	addItems();
 });
