@@ -229,7 +229,6 @@ function addToList(newName, newPrice, newIsTaxable){
 	} else {
 		alert('Please input an item name and valid number');
 	}
-		console.log(shoppingCart);
 		populateList();
 
 }
