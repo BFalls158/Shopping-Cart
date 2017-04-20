@@ -210,7 +210,7 @@ function createForm() {
 	// Pull values from text boxes and check box
 function addItems(){
 	var itemVal = document.getElementById('addItem').value;
-	var priceVal = parseInt(document.getElementById('addPrice').value);
+	var priceVal = Number(document.getElementById('addPrice').value);
 	var taxable = document.getElementById('checkbox').checked;
 	addToList(itemVal, priceVal, taxable);
 	document.getElementById('addItem').value = "";
@@ -227,7 +227,7 @@ function addToList(newName, newPrice, newIsTaxable){
 			isTaxable: newIsTaxable
 		}
 	} else {
-		alert('Please input an item name and valid number');
+		alert('Please input an item name and valid dollar amount.');
 	}
 		populateList();
 
