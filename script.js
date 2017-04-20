@@ -86,7 +86,15 @@ var shoppingCart = [
 }
 ];
 
-// Beacuase Adam is mean
+	//Creates page
+window.addEventListener("load", createPage());
+	//Event handler for on click function of add button
+document.getElementById('addBtn').addEventListener('click', function(){
+	addItems();
+});
+
+
+// Function Declarations
 
 // Create HTML Base
 function createPage(){
@@ -97,7 +105,7 @@ createForm();
 populateList();
 }
 
-// Function Declarations
+//Calculate totals
 function total(){
 	var total = 0;
 	for (var i = 0; i < shoppingCart.length; i++) {
@@ -233,14 +241,6 @@ function addToList(newName, newPrice, newIsTaxable){
 		populateList();
 
 }
-
-
-	//Creates page
-window.addEventListener("load", createPage());
-	//Event handler for on click function of add button
-document.getElementById('addBtn').addEventListener('click', function(){
-	addItems();
-});
 
 
 
