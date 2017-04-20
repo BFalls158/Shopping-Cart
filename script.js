@@ -90,9 +90,10 @@ var shoppingCart = [
 
 // Create HTML Base
 function createPage(){
-var header = document.createElement('h1');
+var header = document.createElement('h3');
 header.innerText = "Shopping List";
 document.body.appendChild(header);
+createForm();
 populateList();
 }
 
@@ -153,20 +154,38 @@ function appendTotal(table) {
 	table.appendChild(priceRow);
 	var totalHeading = document.createElement('th');
 	totalHeading.setAttribute('colspan', '2');
-	totalHeading.style.textAlign = "center";
 	totalHeading.innerText = 'Total';
 	priceRow.appendChild(totalHeading);
 	var totalRow = document.createElement('tr');
 	var totalCell = document.createElement('td');
 	totalCell.innerText = total();
-	totalCell.style.textAlign = "center";
 	totalCell.setAttribute('colspan', '2');
 	totalRow.appendChild(totalCell);
 	table.appendChild(totalRow);
 }
 
+function createForm() {
+	var form = document.createElement('form');
+	var textBox1 = document.createElement('input');
+	textBox1.setAttribute('type', 'textbox');
+	textBox1.setAttribute('id', 'addItem');
+	textBox1.setAttribute('placeholder', 'Item');
+	var textBox2 = document.createElement('input');
+	textBox2.setAttribute('type', 'textbox');
+	textBox2.setAttribute('id', 'addPrice');
+	textBox2.setAttribute('placeholder', 'Price');
+	var button = document.createElement('button');
+	button.innerText = 'Add';
+	document.body.appendChild(form);
+	form.appendChild(textBox1);
+	form.appendChild(textBox2);
+	form.appendChild(button);
+}
+
 
 window.addEventListener("load", createPage());
+
+
 // Make an array
 
 // function makeArray(num1, num2) {
